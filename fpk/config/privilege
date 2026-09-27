@@ -1,0 +1,8 @@
+{
+    "defaults": {
+        "run-as": "root"
+    },
+    "folder-permission": {
+        "rw": ["/vol1", "/vol2", "/vol3", "/vol4", "/vol5", "/vol6", "/vol7", "/vol8", "/vol9", "/vol10"]
+    }
+}

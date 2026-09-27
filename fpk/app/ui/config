@@ -1,0 +1,14 @@
+{
+  ".url": {
+    "autounpack.main": {
+      "title": "自动解压",
+      "icon": "images/icon_{0}.png",
+      "type": "iframe",
+      "protocol": "",
+      "gatewayPrefix": "/app/autounpack",
+      "gatewaySocket": "app.sock",
+      "url": "/app/autounpack/",
+      "allUsers": true
+    }
+  }
+}

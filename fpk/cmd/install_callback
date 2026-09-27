@@ -1,0 +1,6 @@
+#!/bin/bash
+mkdir -p "${TRIM_PKGVAR}"
+mkdir -p "${TRIM_PKGETC}"
+chmod +x "${TRIM_APPDEST}/autounpack" 2>/dev/null
+chmod +x "${TRIM_APPDEST}/bin/7zz" 2>/dev/null
+exit 0
