@@ -56,9 +56,10 @@ func defaultConfig() *Config {
 }
 
 var (
-	cfgPath string
-	cfg     *Config
-	cfgMu   sync.RWMutex
+	cfgPath       string
+	backupCfgPath string
+	cfg           *Config
+	cfgMu         sync.RWMutex
 )
 
 func loadConfig() *Config {
@@ -66,6 +67,18 @@ func loadConfig() *Config {
 	data, err := os.ReadFile(cfgPath)
 	if err == nil {
 		_ = json.Unmarshal(data, c)
+	}
+	// If local config missing or has no watch dir, try restore from persistent backup
+	if c.WatchDir == "" && backupCfgPath != "" {
+		if bdata, berr := os.ReadFile(backupCfgPath); berr == nil {
+			var bc Config
+			if json.Unmarshal(bdata, &bc) == nil && bc.WatchDir != "" {
+				c = &bc
+				addLog("INFO", "从备份恢复配置")
+				// Write back to local
+				_ = os.WriteFile(cfgPath, bdata, 0644)
+			}
+		}
 	}
 	if c.DiskMarginMB <= 0 {
 		c.DiskMarginMB = 500
@@ -75,7 +88,15 @@ func loadConfig() *Config {
 
 func saveConfig(c *Config) error {
 	data, _ := json.MarshalIndent(c, "", "  ")
-	return os.WriteFile(cfgPath, data, 0644)
+	if err := os.WriteFile(cfgPath, data, 0644); err != nil {
+		return err
+	}
+	// Persistent backup survives app reinstall
+	if backupCfgPath != "" {
+		_ = os.MkdirAll(filepath.Dir(backupCfgPath), 0755)
+		_ = os.WriteFile(backupCfgPath, data, 0644)
+	}
+	return nil
 }
 
 func getCfg() *Config {
@@ -632,7 +653,7 @@ func startWorkers(n int) {
 }
 
 var gwPrefix = "/app/autounpack"
-const version = "1.5.2"
+const version = "1.5.4"
 
 func writeJSON(w http.ResponseWriter, v interface{}) {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
@@ -865,6 +886,7 @@ func main() {
 	if *workDir == "" {
 		cfgPath = "config.json"
 	}
+	backupCfgPath = "/etc/autounpack/config.json"
 	cfg = loadConfig()
 
 	startWorkers(cfg.MaxWorkers)
