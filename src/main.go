@@ -632,7 +632,7 @@ func startWorkers(n int) {
 }
 
 var gwPrefix = "/app/autounpack"
-const version = "1.5.1"
+const version = "1.5.2"
 
 func writeJSON(w http.ResponseWriter, v interface{}) {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
