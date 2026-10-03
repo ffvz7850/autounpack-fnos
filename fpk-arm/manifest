@@ -1,5 +1,5 @@
 appname               = autounpack
-version               = 1.5.4
+version               = 1.5.5
 display_name          = 自动解压
 desc                  = 自动监控指定目录中的压缩包，利用多核并行解压到统一输出目录，并将已处理压缩包归档。支持 ZIP/RAR/7Z/TAR/GZ 等常见格式。
 platform              = arm
