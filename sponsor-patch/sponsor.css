@@ -1,0 +1,49 @@
+/* ============================================================
+   Sponsor Box - 赞助窗口样式
+   用法：将本文件 <link> 到页面，或把内容粘贴到 <style> 中
+   ============================================================ */
+
+.sponsor-box {
+    margin-top: 14px;
+    padding: 10px 12px;
+    background: #fafafa;
+    border-radius: 8px;
+    border: 1px solid #e8e8e8;
+    text-align: center;
+}
+
+.sponsor-box .sponsor-title {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 2px;
+}
+
+.sponsor-box .sponsor-desc {
+    font-size: 11px;
+    color: #bbb;
+    margin-bottom: 8px;
+}
+
+.sponsor-qrcodes {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+.sponsor-qr {
+    text-align: center;
+}
+
+.sponsor-qr img {
+    width: 96px;
+    height: 96px;
+    border-radius: 6px;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .08);
+}
+
+.sponsor-qr .qr-label {
+    font-size: 11px;
+    color: #999;
+    margin-top: 4px;
+}
