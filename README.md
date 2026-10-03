@@ -1,4 +1,4 @@
-# AutoUnpack for fnOS
+# AutoUnpack for fnOS 适用于飞牛系统的自动解压工具
 
 飞牛 fnOS 自动解压 FPK 应用。
 
